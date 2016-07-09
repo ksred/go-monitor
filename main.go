@@ -3,7 +3,6 @@ package main
 import (
 	"bytes"
 	"errors"
-	"fmt"
 	"io"
 	"io/ioutil"
 	"log"
@@ -34,7 +33,7 @@ type ymlConf struct {
 }
 
 func main() {
-	fmt.Println("Go Monitor running")
+	//fmt.Println("Go Monitor running")
 	// Load config
 	conf := ymlConf{}
 	data, err := ioutil.ReadFile("/usr/local/etc/go-monitor.yml")
@@ -56,7 +55,7 @@ func main() {
 
 	server, err := getServerInfo(&conf)
 	if err != nil {
-		fmt.Println("Error getting server information, using NIL")
+		//fmt.Println("Error getting server information, using NIL")
 		server = "NIL"
 	}
 
@@ -172,10 +171,10 @@ func checkProcess(processName string, procErrChan chan string, wg *sync.WaitGrou
 	w.Close()
 	c2.Wait()
 
-	fmt.Println(&b2)
+	//fmt.Println(&b2)
 	lines, err := lineCounter(&b2)
 	if err != nil {
-		fmt.Printf("Error: %s\n", err.Error())
+		//fmt.Printf("Error: %s\n", err.Error())
 		os.Exit(0)
 	}
 
@@ -184,7 +183,7 @@ func checkProcess(processName string, procErrChan chan string, wg *sync.WaitGrou
 	wg.Done()
 
 	if lines == 0 {
-		fmt.Printf("Error: no process %s found running!\n", processName)
+		//fmt.Printf("Error: no process %s found running!\n", processName)
 		procErrChan <- processName
 	}
 
@@ -216,13 +215,13 @@ func lineCounter(r io.Reader) (int, error) {
 // Notifyproceerror sends a notification for a given process
 func notifyProcError(proc string, server string, recipientNumber string, c *cache.Cache, conf *ymlConf) {
 	if len(proc) > 0 {
-		fmt.Printf("### ERROR: proc %s not running!\n", proc)
+		//fmt.Printf("### ERROR: proc %s not running!\n", proc)
 
 		// Check cache for process
 		_, found := c.Get(proc)
 		if found {
 			// Wait until expiry before another notification
-			fmt.Printf("Process %s stored in cache, skipping\n", proc)
+			//fmt.Printf("Process %s stored in cache, skipping\n", proc)
 			return
 		}
 
@@ -239,7 +238,7 @@ func notifyProcError(proc string, server string, recipientNumber string, c *cach
 		v.Set("body", proc+" not running on server "+server+"!")
 		rb := *strings.NewReader(v.Encode())
 
-		//client := &http.Client{}
+		client := &http.Client{}
 
 		req, _ := http.NewRequest("POST", urlStr, &rb)
 		req.SetBasicAuth("AccessKey", authToken)
@@ -247,11 +246,11 @@ func notifyProcError(proc string, server string, recipientNumber string, c *cach
 		req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 
 		// Make request
-		//_, err := client.Do(req)
-		//if err != nil {
-		//fmt.Printf("Error: %s\n", err.Error())
-		//return
-		//}
+		_, err := client.Do(req)
+		if err != nil {
+			//fmt.Printf("Error: %s\n", err.Error())
+			return
+		}
 		//fmt.Println(resp.Status)
 
 		//fmt.Println("Notification sent!")
