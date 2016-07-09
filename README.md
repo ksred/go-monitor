@@ -31,9 +31,7 @@ This program is intended for use on Unix systems.
 
 4. Copy config to `/usr/local/etc/go-monitor.yml`.
 
-5. `go build && go install`
-
-6. Optional: use `init` file as script for use as a service. `go-monitor` must be placed in `/usr/local/bin/` for this script. Script should be placed in `/etc/init.d/`.
+5. `bash install.sh` will build the program and add it as a service. 
 
 ## How it works
 We use a Go to push this onto the server:
