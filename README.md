@@ -29,7 +29,7 @@ This program is intended for use on Unix systems.
 
 3. Update `go-monitor.yml.sample` to include the configuration options desired. 
 
-4. Copy config to `/usr/local/etc/go-monitor.yml`.
+4. Rename config to `go-monitor.yml`.
 
 5. `bash install.sh` will build the program and add it as a service. 
 
