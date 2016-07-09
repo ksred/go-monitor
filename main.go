@@ -76,7 +76,7 @@ func main() {
 				// This is how often the checks for each process will run
 				if index == len(processes)-1 {
 					// Check every 60 seconds
-					time.Sleep(2 * time.Second)
+					time.Sleep(60 * time.Second)
 				}
 			}
 			wg.Wait()
