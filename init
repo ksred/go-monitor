@@ -8,7 +8,7 @@ DAEMON_PATH="/usr/local/bin/"
 
 DAEMON=go-monitor
 
-NAME=myapp
+NAME=go-monitor
 DESC="go-monitor service monitoring"
 PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
