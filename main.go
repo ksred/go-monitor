@@ -235,7 +235,7 @@ func notifyProcError(proc string, server string, recipientNumber string, c *cach
 		v := url.Values{}
 		v.Set("recipients", recipientNumber)
 		v.Set("originator", conf.Config.MessageBirdSender)
-		v.Set("body", proc+" not running on server "+server+"!")
+		v.Set("body", "📢 "+proc+" not running on server "+server+"!")
 		rb := *strings.NewReader(v.Encode())
 
 		client := &http.Client{}
