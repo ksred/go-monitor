@@ -1,0 +1,16 @@
+{
+	"ImportPath": "github.com/ksred/go-monitor",
+	"GoVersion": "go1.8",
+	"GodepVersion": "v79",
+	"Deps": [
+		{
+			"ImportPath": "github.com/patrickmn/go-cache",
+			"Comment": "v2.0.0-7-gea4bd2a",
+			"Rev": "ea4bd2a538d816ad2bd3426ced3a99f2382103ba"
+		},
+		{
+			"ImportPath": "gopkg.in/yaml.v2",
+			"Rev": "a3f3340b5840cee44f372bddb5880fcbc419b46a"
+		}
+	]
+}
