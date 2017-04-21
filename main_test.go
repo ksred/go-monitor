@@ -2,72 +2,38 @@ package main
 
 import (
 	"bytes"
-	"io/ioutil"
 	"testing"
 )
 
-func TestParseConf(t *testing.T) {
-	conf := ymlConf{}
+func TestValidate(t *testing.T) {
+	monitor := Monitor{}
 
-	// Construct yaml data
-	data := `
-processes:
-config:
-`
-	err := parseConf([]byte(data), &conf)
+	err := monitor.validate()
 	if err == nil {
 		t.Errorf("Looking for %v, got %v", "We need to monitor at least one process", nil)
 	}
-	data = `
-processes: [ "test" ]
-config:
-`
-	err = parseConf([]byte(data), &conf)
+
+	monitor.Processes = []string{"test"}
+
+	err = monitor.validate()
 	if err == nil {
 		t.Errorf("Looking for %v, got %v", "Not all config variables present", nil)
 	}
-	data = `
-processes: [ "test" ]
-config:
-  messagebirdtoken: "test"
-  messagebirdsender: "test"
-  recipients: "test"
-  defaultttl: 1
-  servernicename: "test"
-`
-	err = parseConf([]byte(data), &conf)
-	if err != nil {
-		t.Errorf("Looking for %v, got %v", nil, err)
-	}
-}
 
-func TestParseConfFromFile(t *testing.T) {
-	conf := ymlConf{}
-	data, err := ioutil.ReadFile("go-monitor.yml")
-	if err != nil {
-		t.Errorf("Looking for %v, got %v", nil, err)
-	}
-	err = parseConf(data, &conf)
+	monitor.Config.MessageBirdToken = "test"
+	monitor.Config.MessageBirdSender = "test"
+	monitor.Config.Recipients = "test"
+	monitor.Config.DefaultTTLSeconds = 1
+	monitor.Config.ServerNiceName = "test"
+
+	err = monitor.validate()
 	if err != nil {
 		t.Errorf("Looking for %v, got %v", nil, err)
 	}
 }
 
 func TestGetServerInfo(t *testing.T) {
-	conf := ymlConf{}
-	data, err := ioutil.ReadFile("go-monitor.yml")
-	if err != nil {
-		t.Errorf("Looking for %v, got %v", nil, err)
-	}
-	err = parseConf(data, &conf)
-	if err != nil {
-		t.Errorf("Looking for %v, got %v", nil, err)
-	}
 
-	_, err = getServerInfo(&conf)
-	if err != nil {
-		t.Errorf("Looking for %v, got %v", nil, err)
-	}
 }
 
 func TestCheckProc(t *testing.T) {
