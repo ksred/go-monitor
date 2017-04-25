@@ -1,0 +1,8 @@
+processes: [ "list", "of", "processes", "tcp://localhost:8000", "http://keyshift.co" ]
+config:
+ messagebirdtoken: "test_TOKEN"
+ messagebirdsender: "+sender-number"
+ recipients: "+recipient-numbers,+one-or-many"
+ defaultttlseconds: 5
+ servernicename: "my-server-name"
+ checkfrequencyseconds: 5

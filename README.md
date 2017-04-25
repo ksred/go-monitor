@@ -1,3 +1,5 @@
+[![Go Report Card](https://goreportcard.com/badge/github.com/ksred/go-monitor)](https://goreportcard.com/report/github.com/ksred/go-monitor)
+
 # Simple server monitoring in Go
 
 `go-monitor` is simple server monitoring written in Go. I was on the lookout for a tool which allowed me 
@@ -21,11 +23,7 @@ This program is intended for use on Unix systems.
 ## Installation
 1. `go get github.com/ksred/go-monitor`
 
-2. Install dependencies:
-
- `go get github.com/patrickmn/go-cache`
-
- `go get gopkg.in/yaml.v2`
+2. Install dependencies: `godep restore`  (If you are unfamiliar with Godeop see [here](https://github.com/tools/godep))
 
 3. Update `go-monitor.yml.sample` to include the configuration options desired. 
 

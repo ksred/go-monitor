@@ -1,7 +1,0 @@
-processes: [ "list", "of", "processes" ]
-config:
- messagebirdtoken: "test_TOKEN"
- messagebirdsender: "+sender-number"
- recipients: "+recipient-numbers,+one-or-many"
- defaultttl: 30 // This is a TTL in minutes, how often notifications will be sent for the same service that has not recovered
- servernicename: "my-server-name"
